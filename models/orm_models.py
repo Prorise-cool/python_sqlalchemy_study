@@ -12,16 +12,15 @@ from sqlalchemy import String, Integer, Numeric, ForeignKey, Boolean
 from sqlalchemy.orm import Mapped, mapped_column, relationship  # 导入 relationship
 from typing import Optional, List
 from .base import AbstractBaseModel, TimestampMixin, Base  # 从同目录的 base.py 导入
-from utils.print_utils import print_success
-
+from utils.print_utils import print_success  # 绝对导入
 
 # --- 定义具体模型 ---
 class CategoryORM(AbstractBaseModel, TimestampMixin):  # 继承 AbstractBaseModel 和 TimestampMixin
     """产品类型 ORM 模型"""
-    __tableName__ = "categories_orm"
+    __tablename__ = "categories_orm"
 
     name: Mapped[str] = mapped_column(
-        String(100), nullable=False, index=True, Unique=True, comment="类别名称"
+        String(100), nullable=False, index=True, unique=True, comment="类别名称"
     )
     description: Mapped[Optional[str]] = mapped_column(
         String(255), nullable=True, comment="类别描述"
@@ -42,7 +41,7 @@ class CategoryORM(AbstractBaseModel, TimestampMixin):  # 继承 AbstractBaseMode
 
 class ProductORM(AbstractBaseModel, TimestampMixin):
     """产品 ORM 模型"""
-    __tableName__ = "products_orm"
+    __tablename__ = "products_orm"
 
     name: Mapped[str] = mapped_column(
         String(100), index=True, comment="产品名称",
